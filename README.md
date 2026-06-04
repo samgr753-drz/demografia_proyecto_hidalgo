@@ -1,6 +1,7 @@
 *Análisis Demográfico del estado de Hidalgo* 
 
 *Gómez Rodríguez Samuel*
+
 *Gómez Rodríguez Sarah Julieta*
 
 ---
