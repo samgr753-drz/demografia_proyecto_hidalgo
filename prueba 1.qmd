@@ -1,7 +1,14 @@
 ---
-title: "Entrega preliminar"
-author: "Gómez Rodríguez Samuel y Gómez Rodríguez Sarah Julieta"
-format: pdf
+title: "Análisis Demográfico del Estado de Hidalgo"
+author: 
+  - Gómez Rodríguez Samuel
+  - Gómez Rodríguez Sarah Julieta
+format:
+  pdf: 
+    toc: true
+    toc-depth: 3
+    colorlinks: true
+    linkcolor: black
 editor: visual
 ---
 
@@ -19,7 +26,9 @@ Las tablas de vida muestran que, incluso antes de la pandemia (2010 y 2019), las
 
 Por la pandemia de Covid-19, la tabla de vida de 2021 muestra una ruptura en la tendencia de mejora de la esperanza de vida observada entre 2010 y 2019. Para los hombres, la esperanza de vida al nacer en 2021 cae a 69.44 años (frente a 74.33 en 2010), mientras que para las mujeres desciende a 76.9 años (frente a 79.4 en 2010).
 
-En este sentido, el crecimiento poblacional moderado (15.7% entre 2010 y 2020) y el envejecimiento de la estructura por edad indican que Hidalgo se encuentra en una fase avanzada de la transición demográfica: bajas tasas de natalidad y de mortalidad general, pero con un peso creciente de las enfermedades no transmisibles y de la mortalidad en edades avanzadas.
+Por otro lado, veremos que los indicadores de fecundidad reflejan una clara tendencia hacia el descenso de la fecundidad en Hidalgo.
+
+En este sentido, el crecimiento poblacional moderado (15.7% entre 2010 y 2020) y el envejecimiento de la estructura por edad indican que Hidalgo se encuentra en una fase avanzada de la transición demográfica: bajas tasas de natalidad y de mortalidad general, donde las nuevas generaciones estarían optando por tener menos hijas, posiblemente asociado a cambios en las prioridades sociales y económicas; pero con un peso creciente de las enfermedades no transmisibles y de la mortalidad en edades avanzadas.
 
 ## **Diagrama de Flujo**
 
@@ -110,9 +119,10 @@ Por otro lado, se descargó la base de datos de mortalidad de Hidalgo 1990 a 202
 
 Todos los cálculos mencionados anteriormente se hicieron en un documento Excel: "Tablas de Mortalidad Hidalgo"
 
-Después, se cargo este Excel a R studio para proceder a hacer los calculos.
+Después, se cargo este Excel a R Studio para proceder a hacer los cálculos.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
+
 #---Librerías necesarias ---
 library(readxl)
 library(dplyr)
@@ -200,8 +210,7 @@ lt_abr <- function(x, n, mx, sex = "f", IMR = NA){
 tabla_vidaf2010 <- lt_abr(x = hidalgo$x, n = hidalgo$n, mx = hidalgo$mx, sex = "f")
 
 #---  Ver resultados ---
-print(tabla_vidaf2010)
-
+#print(tabla_vidaf2010)
 ```
 
 Este es el ejemplo para la tabla de vida para la población femenina de Hidalgo 2010. Así replicamos este código con cada tabla de vida, por sexo y año.
@@ -226,6 +235,16 @@ knitr::include_graphics("cuadro de esperanzas.jpeg")
 knitr::include_graphics("dx femenino.png")
 ```
 
+En la gráfica podemos observar cuántas mujeres fallecen en cada rango de edad específico, en la gráfica tenemos los años 2010, 2019, y 2021. 
+
+En los tres años, vemos un pico muy pronunciado en el año cero, esto representa el alto riesgo de un recién nacido. En 2010, morían 1,060 mujeres en el primer año de vida, para 2019 y 2021, esa cifra disminuye.  
+
+Pasando el primer año de vida, se observa cómo caen los datos, en la etapa de la niñez y adolescencia, para volver a subir. A partir de los 40 años, las defunciones comienzan a aumentar de manera exponencial. 
+
+El número de defunciones femeninas en Hidalgo, refleja la longevidad hasta 2019. 
+
+Aunque se ve como sobresale la gráfica de 2021, se considera una sobremortalidad causada por COVID- 19, provocando que se desplaza de forma prematura hacia mujeres de entre 35 - 65 años. 
+
 ```{r}
 #| echo: false
 #| out.width: "50%"
@@ -233,6 +252,12 @@ knitr::include_graphics("dx femenino.png")
 
 knitr::include_graphics("dx masculino.png")
 ```
+
+Esta variable nos muestra cuántos hombres de la cohorte inicial, fallecen en cada rango de edad específico para los años 2010, 2019 y 2021. 
+
+Al igual que la gráfica femenina, la curva inicia con un pico alto en el primer año de vida.  A diferencia de las mujeres, la gráfica de los hombres muestra un repunte en el número de muertes entre los 15 y 30 años, reflejando causas externas de muerte y sobremortalidad masculina joven. 
+
+Observando la gráfica del año 2021, a partir de los 35 años, las defunciones masculinas se elevan de forma acelerada, viendose mucho más marcada en ese año y con un impacto mucho más marcado que las mujeres.
 
 ```{r}
 #| echo: false
@@ -242,6 +267,14 @@ knitr::include_graphics("dx masculino.png")
 knitr::include_graphics("mx femenino.png")
 ```
 
+Esta variable representa la fuerza con la que ocurren las defunciones en cada grupo de edad, la calculamos como el número de muertes entre el tiempo vivido de las personas durante ese año. 
+
+La curva comienza con un valor muy elevado en la edad 0, comparando los 3 años. En 2010 la tasa era de 0.0107, en 2019 bajando a 0.0092, y en 0.0094 para el año 2021. Después del primer año de edad, la tasa cae drásticamente.
+
+Analizando la línea azul, a partir del grupo de 20 años, se empieza a separar de los datos de 2010 y 2019. El contraste más marcado se observa en el grupo de 35-39 años, donde la tasa aumentó de 0.0011 en 2019 a 0.0018 en 2021.
+
+Esto demuestra que en el año 2021, ocurrió un incremento en la fuerza de la mortalidad en el estado, rompiendo con la tendencia a la baja que se registraban en años anteriores.
+
 ```{r}
 #| echo: false
 #| out.width: "50%"
@@ -249,6 +282,14 @@ knitr::include_graphics("mx femenino.png")
 
 knitr::include_graphics("mx masculino.png")
 ```
+
+La curva comienza con un valor elevado en la edad 0, si observamos detalladamente, en los 3 años se ve un descenso en la mortalidad infantil. 
+
+Después del primer año de vida, la tasa cae drásticamente. El punto más bajo de la gráfica se alcanza en el grupo de 5 a 9 años. 
+
+A diferencia de la gráfica femenina, esta curva presenta alteraciones muy marcadas. 
+
+Entre los 15 y 30 años, la línea no sube de forma recta, sino experimenta alteraciones, demostrando la alta incidencia de muertes por causas externas. 
 
 ```{r}
 #| echo: false
@@ -258,6 +299,10 @@ knitr::include_graphics("mx masculino.png")
 knitr::include_graphics("qx femenino.png")
 ```
 
+Esta variable mide la probabilidad de que una mujer que ha alcanzado una edad exacta x fallezca antes de cumplir la siguiente edad exacta. 
+
+La gráfica refleja de forma muy precisa cómo la pandemia aumentó el riesgo en el estado de Hidalgo, elevando las probabilidades de morir en prácticamente todos los rangos de edad a partir de la juventud. 
+
 ```{r}
 #| echo: false
 #| out.width: "50%"
@@ -265,6 +310,14 @@ knitr::include_graphics("qx femenino.png")
 
 knitr::include_graphics("qx masculina.png")
 ```
+
+Se observa un descenso en la mortalidad infantil en los tres años. Su punto más minimo está en el grupo de 5 a 9 años. La probabilidad masculina rompe por completo la trayectoria lineal que se ve en la probabilidad de las mujeres. 
+
+En los años 15 y 30, se genera una “joroba” demostrando que un joven del estado de Hidalgo tiene un riesgo de morir bastante alto a comparación de un niño o una mujer de la misma edad, debido a factores externos. 
+
+Observando la línea de 2021, a partir de los 30 años, la probabilidad de muerte sube de forma exponencial a causa de envejecimiento biológico, y por el impacto de la pandemia, se ve un desplazamiento mucho más pronunciado, despegándose por completo de los años 2010 y 2019. 
+
+Este severo incremento del riesgo a fallecer, corrompe la estructura de supervivencia de la cohorte, causando un desplome histórico de más de 5 años en la expectativa de vida masculina. 
 
 ```{r}
 #| echo: false
@@ -274,6 +327,14 @@ knitr::include_graphics("qx masculina.png")
 knitr::include_graphics("lx femenino.png")
 ```
 
+Esta variable representa una cohorte inicial de 100,000 niñas y cuántas de ellas logran sobrevivir al cumplir cada edad exacta x. 
+
+En los años 2010 y 2019, observamos como sus líneas se mantienen muy cerca del total de sobrevivientes, y como la mayoría de la población femenina lograba sobrevivir hasta la vejez. 
+
+Caso contrario con la curva de 2021. 
+
+La gráfica de 2021, muestra datos muy distintos a causa de la pandemia, aunque comienza bastante igual con los otros dos años, a partir de las edades adultas, la pendiente se vuelve mucho más pronunciada, en particular a partir de los 40 años
+
 ```{r}
 #| echo: false
 #| out.width: "50%"
@@ -281,6 +342,12 @@ knitr::include_graphics("lx femenino.png")
 
 knitr::include_graphics("lx masculino.png")
 ```
+
+A diferencia de la gráfica de las mujeres, la curva de los hombres muestra un comportamiento diferente. 
+
+Para los años 2010 y 2019, muestran una pendiente que empieza a inclinarse hacia abajo mucho antes que la vejez, presentando defunciones en jóvenes de 15 a 30 años. (ya lo analizamos previamente). 
+
+Para el año 2021, cambió la estructura de sobrevivencia en la población masculina. En la gráfica se observa como la línea azul se separa mucho antes y de manera más profunda y hacia abajo. A pesar de que el estado de Hidalgo experimenta una pérdida constante desde la juventud, en 2021 acelera este proceso, provocando que la cohorte se redujera a un ritmo mucho más rápido, y más población masculina falleciera antes de alcanzar la vejez avanzada.
 
 ```{r}
 #| echo: false
@@ -290,6 +357,14 @@ knitr::include_graphics("lx masculino.png")
 knitr::include_graphics("ex femenino.png")
 ```
 
+Esta variable mide el promedio de años que le quedan por vivir a una mujer que ha llegado a una edad determinada, con el supuesto de que las condiciones de mortalidad en ese año específico se mantuvieran constantes. 
+
+Continuamos con datos de 2010, 2019 y 2021. 
+
+La gráfica nos muestra una pendiente descendente y continúa, expresando que, entre más edad tiene una persona, menor es el número de años que le restan por vivir. 
+
+Podemos observar que la pandemia de 2021 interrumpió la trayectoria en el estado. Podemos ver una pérdida de casi 4 años en la esperanza de vida femenina al nacer es una consecuencia del aumento en los riesgos de morir. 
+
 ```{r}
 #| echo: false
 #| out.width: "50%"
@@ -298,69 +373,800 @@ knitr::include_graphics("ex femenino.png")
 knitr::include_graphics("ex masculino.png")
 ```
 
-## **Tabla de mortalidad femenina Hidalgo 2010**
+Comparando esta gráfica con la femenina, se reflejan muchas diferencias. 
+
+El punto inicial de la gráfica nos indica que la esperanza de vida al nacer en el año 2010 y 2019, es bastante similar, caso contrario con el año 2021, donde el impacto de la pandemia es bastante marcada. La línea azul cae de forma drástica. ubicando la esperanza de vida al nacer en 69.45 años, un retroceso bastante notable.
+
+## **Tabla de Mortalidad Femenina Hidalgo 2010**
+
+```{r}
+#| echo: false
+#| message: false
+library(dplyr)
+library(tidyr)
+
+tabla_vidaf2010 %>% 
+  knitr::kable(digits = 3)
+```
+
+## **Tabla de Mortalidad Femenina Hidalgo 2019**
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+#---Librerías necesarias ---
+library(readxl)
+library(dplyr)
+library(data.table)
+library(lubridate)
+library(ggplot2)
+
+# --- Establecer ruta del archivo ---
+
+ruta_archivo <- "C:/Users/samgr/OneDrive/Documentos/Trabajo final demografía/demografia_proyecto_hidalgo/Tablas de Mortalidad Hidalgo.xlsx"
+
+# --- Lectura y limpieza de datos ---
+hidalgo <- read_excel(ruta_archivo, 
+                      sheet = "Tabla de Mortalidad F 2019"
+                      #skip  = 3
+                      ) %>%
+  #Homologar los nombres de las columnas
+  rename_with(~case_when(
+    .x %in% c("x", "x(edad)") ~ "x",
+    .x %in% c("n") ~ "n",
+    .x %in% c("nNx", "N") ~ "N",
+    .x %in% c("nDx", "D") ~ "D",
+    TRUE ~ .x
+  ))%>%
+  
+  #Transformar todas las columnas a variables numéricas
+  
+  mutate(
+    x = as.numeric(x),
+    n = as.numeric(n),
+    N = as.numeric(N),
+    D = as.numeric(D),
+    #Cálculo de las tasas de mortalidad
+    mx = D/N
+  )
+
+#--- Función de tablas de vida abreviadas ---
+lt_abr <- function(x, n, mx, sex = "f", IMR = NA){
+  m <- length(x)
+  ax <- n/2
+  #Ajustes Coale-Demeny para edades 0-1
+  if(sex == "m"){
+    ax[1] <- ifelse(mx[1]>=0.107, 0.330, 0.045+2.684*mx[1])
+  }else{
+    ax[1] <- ifelse(mx[1]>=0.107, 0.350, 0.053+2.800*mx[1])
+  }
+  
+  #Ajustes Coales-Demeny para edades 1-4
+  if(sex == "m"){
+    ax[2] <- ifelse(mx[1]>=0.107, 1.352, 1.651+2.816*mx[1])
+  }else{
+    ax[2] <- ifelse(mx[1]>=0.107, 1.361, 1.522+1.518*mx[1])
+  }
+  
+  
+  #Probabilidad de muerte
+  qx <- (n*mx)/(1+(n-ax)*mx)
+  qx[m] <- 1
+  
+  #Probabilidad de sobrevivencia
+  px <- 1 - qx
+  
+  # l_x
+  lx <- 100000*cumprod(c(1, px[-m]))
+  
+  # dx
+  dx <- c(-diff(lx), lx[m])
+  
+  #Lx
+  Lx <- n*c(lx[-1],0)+ax*dx
+  Lx[m] <- lx[m]/mx[m]
+  
+  #Tx
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  #e_x
+  ex <- Tx/lx
+  
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+}
+
+#--- Aplicar función a tus datos ---
+#Usamos las columnas ya limpias (x, n, mx) para calcular la tabla de vida
+tabla_vidaF2019 <- lt_abr(x = hidalgo$x, n = hidalgo$n, mx = hidalgo$mx, sex = "f")
+
+#---  Ver resultados ---
+# print(tabla_vidaF2019)
+library(dplyr)
+library(tidyr)
+
+tabla_vidaF2019 %>% 
+  knitr::kable(digits = 3)
+```
+
+```         
+```
+
+## **Tabla de Mortalidad Femenina Hidalgo 2021**
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#---Librerías necesarias ---
+library(readxl)
+library(dplyr)
+library(data.table)
+library(lubridate)
+library(ggplot2)
+
+# --- Establecer ruta del archivo ---
+
+ruta_archivo <- "C:/Users/samgr/OneDrive/Documentos/Trabajo final demografía/demografia_proyecto_hidalgo/Tablas de Mortalidad Hidalgo.xlsx"
+
+# --- Lectura y limpieza de datos ---
+hidalgo <- read_excel(ruta_archivo, 
+                      sheet = "Tabla de Mortalidad F 2021"
+                      #skip  = 3
+                      ) %>%
+  #Homologar los nombres de las columnas
+  rename_with(~case_when(
+    .x %in% c("x", "x(edad)") ~ "x",
+    .x %in% c("n") ~ "n",
+    .x %in% c("nNx", "N") ~ "N",
+    .x %in% c("nDx", "D") ~ "D",
+    TRUE ~ .x
+  ))%>%
+  
+  #Transformar todas las columnas a variables numéricas
+  
+  mutate(
+    x = as.numeric(x),
+    n = as.numeric(n),
+    N = as.numeric(N),
+    D = as.numeric(D),
+    #Cálculo de las tasas de mortalidad
+    mx = D/N
+  )
+
+#--- Función de tablas de vida abreviadas ---
+lt_abr <- function(x, n, mx, sex = "f", IMR = NA){
+  m <- length(x)
+  ax <- n/2
+  #Ajustes Coale-Demeny para edades 0-1
+  if(sex == "m"){
+    ax[1] <- ifelse(mx[1]>=0.107, 0.330, 0.045+2.684*mx[1])
+  }else{
+    ax[1] <- ifelse(mx[1]>=0.107, 0.350, 0.053+2.800*mx[1])
+  }
+  
+  #Ajustes Coales-Demeny para edades 1-4
+  if(sex == "m"){
+    ax[2] <- ifelse(mx[1]>=0.107, 1.352, 1.651+2.816*mx[1])
+  }else{
+    ax[2] <- ifelse(mx[1]>=0.107, 1.361, 1.522+1.518*mx[1])
+  }
+  
+  
+  #Probabilidad de muerte
+  qx <- (n*mx)/(1+(n-ax)*mx)
+  qx[m] <- 1
+  
+  #Probabilidad de sobrevivencia
+  px <- 1 - qx
+  
+  # l_x
+  lx <- 100000*cumprod(c(1, px[-m]))
+  
+  # dx
+  dx <- c(-diff(lx), lx[m])
+  
+  #Lx
+  Lx <- n*c(lx[-1],0)+ax*dx
+  Lx[m] <- lx[m]/mx[m]
+  
+  #Tx
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  #e_x
+  ex <- Tx/lx
+  
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+}
+
+#--- Aplicar función a tus datos ---
+#Usamos las columnas ya limpias (x, n, mx) para calcular la tabla de vida
+tabla_vidaF2021 <- lt_abr(x = hidalgo$x, n = hidalgo$n, mx = hidalgo$mx, sex = "f")
+
+#---  Ver resultados ---
+# print(tabla_vidaF2021)
+library(dplyr)
+library(tidyr)
+
+tabla_vidaF2021 %>% 
+  knitr::kable(digits = 3)
+```
+
+## **Tabla de Mortalidad Masculina Hidalgo 2010**
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#---Librerías necesarias ---
+library(readxl)
+library(dplyr)
+library(data.table)
+library(lubridate)
+library(ggplot2)
+
+# --- Establecer ruta del archivo ---
+
+ruta_archivo <- "C:/Users/samgr/OneDrive/Documentos/Trabajo final demografía/demografia_proyecto_hidalgo/Tablas de Mortalidad Hidalgo.xlsx"
+
+# --- Lectura y limpieza de datos ---
+hidalgo <- read_excel(ruta_archivo, 
+                      sheet = "Tabla de Mortalidad M 2010"
+                      #skip  = 3
+                      ) %>%
+  #Homologar los nombres de las columnas
+  rename_with(~case_when(
+    .x %in% c("x", "x(edad)") ~ "x",
+    .x %in% c("n") ~ "n",
+    .x %in% c("nNx", "N") ~ "N",
+    .x %in% c("nDx", "D") ~ "D",
+    TRUE ~ .x
+  ))%>%
+  
+  #Transformar todas las columnas a variables numéricas
+  
+  mutate(
+    x = as.numeric(x),
+    n = as.numeric(n),
+    N = as.numeric(N),
+    D = as.numeric(D),
+    #Cálculo de las tasas de mortalidad
+    mx = D/N
+  )
+
+#--- Función de tablas de vida abreviadas ---
+lt_abr <- function(x, n, mx, sex = "m", IMR = NA){
+  m <- length(x)
+  ax <- n/2
+  #Ajustes Coale-Demeny para edades 0-1
+  if(sex == "m"){
+    ax[1] <- ifelse(mx[1]>=0.107, 0.330, 0.045+2.684*mx[1])
+  }else{
+    ax[1] <- ifelse(mx[1]>=0.107, 0.350, 0.053+2.800*mx[1])
+  }
+  
+  #Ajustes Coales-Demeny para edades 1-4
+  if(sex == "m"){
+    ax[2] <- ifelse(mx[1]>=0.107, 1.352, 1.651+2.816*mx[1])
+  }else{
+    ax[2] <- ifelse(mx[1]>=0.107, 1.361, 1.522+1.518*mx[1])
+  }
+  
+  
+  #Probabilidad de muerte
+  qx <- (n*mx)/(1+(n-ax)*mx)
+  qx[m] <- 1
+  
+  #Probabilidad de sobrevivencia
+  px <- 1 - qx
+  
+  # l_x
+  lx <- 100000*cumprod(c(1, px[-m]))
+  
+  # dx
+  dx <- c(-diff(lx), lx[m])
+  
+  #Lx
+  Lx <- n*c(lx[-1],0)+ax*dx
+  Lx[m] <- lx[m]/mx[m]
+  
+  #Tx
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  #e_x
+  ex <- Tx/lx
+  
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+}
+
+#--- Aplicar función a tus datos ---
+#Usamos las columnas ya limpias (x, n, mx) para calcular la tabla de vida
+tabla_vidam2010 <- lt_abr(x = hidalgo$x, n = hidalgo$n, mx = hidalgo$mx, sex = "m")
+
+#---  Ver resultados ---
+# print(tabla_vidam2010)
+library(dplyr)
+library(tidyr)
+
+tabla_vidam2010 %>% 
+  knitr::kable(digits = 3)
+```
+
+## **Tabla de Mortalidad Masculina Hidalgo 2019**
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#---Librerías necesarias ---
+library(readxl)
+library(dplyr)
+library(data.table)
+library(lubridate)
+library(ggplot2)
+
+# --- Establecer ruta del archivo ---
+
+ruta_archivo <- "C:/Users/samgr/OneDrive/Documentos/Trabajo final demografía/demografia_proyecto_hidalgo/Tablas de Mortalidad Hidalgo.xlsx"
+
+# --- Lectura y limpieza de datos ---
+hidalgo <- read_excel(ruta_archivo, 
+                      sheet = "Tabla de Mortalidad M 2019"
+                      #skip  = 3
+                      ) %>%
+  #Homologar los nombres de las columnas
+  rename_with(~case_when(
+    .x %in% c("x", "x(edad)") ~ "x",
+    .x %in% c("n") ~ "n",
+    .x %in% c("nNx", "N") ~ "N",
+    .x %in% c("nDx", "D") ~ "D",
+    TRUE ~ .x
+  ))%>%
+  
+  #Transformar todas las columnas a variables numéricas
+  
+  mutate(
+    x = as.numeric(x),
+    n = as.numeric(n),
+    N = as.numeric(N),
+    D = as.numeric(D),
+    #Cálculo de las tasas de mortalidad
+    mx = D/N
+  )
+
+#--- Función de tablas de vida abreviadas ---
+lt_abr <- function(x, n, mx, sex = "m", IMR = NA){
+  m <- length(x)
+  ax <- n/2
+  #Ajustes Coale-Demeny para edades 0-1
+  if(sex == "m"){
+    ax[1] <- ifelse(mx[1]>=0.107, 0.330, 0.045+2.684*mx[1])
+  }else{
+    ax[1] <- ifelse(mx[1]>=0.107, 0.350, 0.053+2.800*mx[1])
+  }
+  
+  #Ajustes Coales-Demeny para edades 1-4
+  if(sex == "m"){
+    ax[2] <- ifelse(mx[1]>=0.107, 1.352, 1.651+2.816*mx[1])
+  }else{
+    ax[2] <- ifelse(mx[1]>=0.107, 1.361, 1.522+1.518*mx[1])
+  }
+  
+  
+  #Probabilidad de muerte
+  qx <- (n*mx)/(1+(n-ax)*mx)
+  qx[m] <- 1
+  
+  #Probabilidad de sobrevivencia
+  px <- 1 - qx
+  
+  # l_x
+  lx <- 100000*cumprod(c(1, px[-m]))
+  
+  # dx
+  dx <- c(-diff(lx), lx[m])
+  
+  #Lx
+  Lx <- n*c(lx[-1],0)+ax*dx
+  Lx[m] <- lx[m]/mx[m]
+  
+  #Tx
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  #e_x
+  ex <- Tx/lx
+  
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+}
+
+#--- Aplicar función a tus datos ---
+#Usamos las columnas ya limpias (x, n, mx) para calcular la tabla de vida
+tabla_vidaM2019 <- lt_abr(x = hidalgo$x, n = hidalgo$n, mx = hidalgo$mx, sex = "m")
+
+#---  Ver resultados ---
+# print(tabla_vidaM2019)
+library(dplyr)
+library(tidyr)
+
+tabla_vidaM2019 %>% 
+  knitr::kable(digits = 3)
+```
+
+## **Tabla de Mortalidad Masculina Hidalgo 2021**
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#---Librerías necesarias ---
+library(readxl)
+library(dplyr)
+library(data.table)
+library(lubridate)
+library(ggplot2)
+
+# --- Establecer ruta del archivo ---
+
+ruta_archivo <- "C:/Users/samgr/OneDrive/Documentos/Trabajo final demografía/demografia_proyecto_hidalgo/Tablas de Mortalidad Hidalgo.xlsx"
+
+# --- Lectura y limpieza de datos ---
+hidalgo <- read_excel(ruta_archivo, 
+                      sheet = "Tabla de Mortalidad M 2021"
+                      #skip  = 3
+                      ) %>%
+  #Homologar los nombres de las columnas
+  rename_with(~case_when(
+    .x %in% c("x", "x(edad)") ~ "x",
+    .x %in% c("n") ~ "n",
+    .x %in% c("nNx", "N") ~ "N",
+    .x %in% c("nDx", "D") ~ "D",
+    TRUE ~ .x
+  ))%>%
+  
+  #Transformar todas las columnas a variables numéricas
+  
+  mutate(
+    x = as.numeric(x),
+    n = as.numeric(n),
+    N = as.numeric(N),
+    D = as.numeric(D),
+    #Cálculo de las tasas de mortalidad
+    mx = D/N
+  )
+
+#--- Función de tablas de vida abreviadas ---
+lt_abr <- function(x, n, mx, sex = "m", IMR = NA){
+  m <- length(x)
+  ax <- n/2
+  #Ajustes Coale-Demeny para edades 0-1
+  if(sex == "m"){
+    ax[1] <- ifelse(mx[1]>=0.107, 0.330, 0.045+2.684*mx[1])
+  }else{
+    ax[1] <- ifelse(mx[1]>=0.107, 0.350, 0.053+2.800*mx[1])
+  }
+  
+  #Ajustes Coales-Demeny para edades 1-4
+  if(sex == "m"){
+    ax[2] <- ifelse(mx[1]>=0.107, 1.352, 1.651+2.816*mx[1])
+  }else{
+    ax[2] <- ifelse(mx[1]>=0.107, 1.361, 1.522+1.518*mx[1])
+  }
+  
+  
+  #Probabilidad de muerte
+  qx <- (n*mx)/(1+(n-ax)*mx)
+  qx[m] <- 1
+  
+  #Probabilidad de sobrevivencia
+  px <- 1 - qx
+  
+  # l_x
+  lx <- 100000*cumprod(c(1, px[-m]))
+  
+  # dx
+  dx <- c(-diff(lx), lx[m])
+  
+  #Lx
+  Lx <- n*c(lx[-1],0)+ax*dx
+  Lx[m] <- lx[m]/mx[m]
+  
+  #Tx
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  #e_x
+  ex <- Tx/lx
+  
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+}
+
+#--- Aplicar función a tus datos ---
+#Usamos las columnas ya limpias (x, n, mx) para calcular la tabla de vida
+tabla_vidaM2021 <- lt_abr(x = hidalgo$x, n = hidalgo$n, mx = hidalgo$mx, sex = "m")
+
+#---  Ver resultados ---
+# print(tabla_vidaM2021)
+library(dplyr)
+library(tidyr)
+
+tabla_vidaM2021 %>% 
+  knitr::kable(digits = 3)
+```
+
+## Tabla de vida de 2019 Causa Eliminada
+
+Resultados
 
 ```{r}
 #| echo: false
 #| out.width: "50%"
 #| fig.align: "center"
 
-knitr::include_graphics("F2010.png")
+knitr::include_graphics("DM1.png")
 ```
-
-## **Tabla de mortalidad femenina Hidalgo 2019**
 
 ```{r}
 #| echo: false
 #| out.width: "50%"
 #| fig.align: "center"
 
-knitr::include_graphics("F2019.png")
+knitr::include_graphics("DM2.png")
 ```
 
-## **Tabla de mortalidad femenina Hidalgo 2021**
+| Esperanza de vida e_0 | Hombres | Mujeres |
+|-----------------------|---------|---------|
+| Sin homicidios        | 75.22   | 81.01   |
+| Con homicidios        | 75.02   | 80.93   |
+| Diferencia            | 0.20    | 0.08    |
+
+Eliminar los homicidios beneficia ligeramente más a los hombres, pero el efecto es pequeño en ambos sexos. Esto sugiere que los homicidios no son la causa principal de muerte prematura en esta población.
+
+La mortalidad es predominante por causas del envejecimiento y enfermedades crónicas.
+
+## ¿Por qué la Tasa de Reemplazo es igual a 2.1?
+
+Sabemos que la Tasa Neta de Reproducción se puede expresar como
+
+$$
+\ NRR = \sum_{x=\alpha}^{\beta} {}_n f_x ^{F} \frac{ {}_n L_x ^{F}}{l_0 ^{F} }
+$$
+
+Que a la vez esta relacionado con
+
+$$
+NRR = p(A) GRR
+$$
+
+Donde $p(A)$ es la probabilidad de que una mujer nacida viva alcance la edad media de maternidad (aproximadamente 28-30 años). Y $GRR$ es la Razón Bruta de Reproducción o Tasa Bruta de Reproducción que nos dice la frecuencia con la que una mujer se esta reproduciendo a si misma.
+
+Esto implica que
+
+$$
+GRR = \frac{NRR}{p(A)}
+$$
+
+Recordemos que
+
+$$
+GRR = n \sum_{x=\alpha}^{\beta} {}_n f_x ^{F}  
+$$
+
+La $NRR$ puede ser igual a 1, menor a 1 o mayor a 1. Para que una población sea estacionaria, se requiere que $NRR = 1$, esto se conoce como la Condición de Reemplazo. Entonces partiendo de $NRR = 1$
+
+$$
+TFG = n \sum_{x=\alpha}^{\beta} {}_n f_x = GRR (1+SRB)= \frac{NRR}{p(A)}(1+SRB)
+$$
+
+Donde $TFG$ es la Tasa Global de Fecundidad que nos dice el número de hijos que tendría si las condiciones permanecieran durante su vida reproductiva.
+
+La $SRB$ es la razón de nacimientos masculinos por cada nacimiento femenino.
+
+En la mayoría de poblaciones humanas (sin intervenciones):
+
+$$
+SRB=1.05
+$$
+
+105 niños por cada 100 niñas.
+
+Por otro lado
+
+$$
+p(A) = 0.98
+$$
+
+Supervivencia del 98% desde el nacimiento hasta la edad reproductiva
+
+Entonces, sustituyendo valores
+
+$$
+TGF_{reemplazo}=  \frac{1+SRB}{p(A)}= \frac{1+1.05}{0.98}= \frac{2.05}{0.98}=2.0918367347  \approx 2.1
+$$
+
+**Observación.** La demostración asume que la edad media de maternidad es constante y que la mortalidad afecta por igual a todas las edades prepuberales.
+
+Como conclusión podemos decir que
+
+1.  Nacen aproximadamente 105 varones por cada 100 mujeres
+2.  Alrededor del 2% de las mujeres fallecen antes de llegar a la edad reproductiva.
+
+## Tasas Globales de Fecundidad (TFG), Tasas Brutas de Reproducción (TBR) y Tasas Netas de Repdroducción (TNR) para Hidalgo 2010 y 2019.
+
+Para calcular las tasas de fecundidad específicas por edad ${}_n f_x$ de las mujeres de 15 a 49 años para 2010 y 2019, se hizó el cociente
+
+$$
+{}_n f_x = \frac{{}_n B_x}{{}_n N_x}
+$$
+
+Para el numerador, se hizo la consulta en INEGI de los nacimientos. Para el denominador, que representa la población femenina a mitad del año respectivo, ya se tenían los datos en el excel de Cálculo de tasas de mortalidad.
+
+Todo este procesamiento de información y el calculo de todas las tasas para cada año, se encuentra detalladamente explicado en el excel Fecundidad_Medidas_Hidalgo.
+
+1.  **Tasas Globales de Fecundidad (TGF):** Su cálculo se obtiene sumando las tasas de fecundidad por edades simples de las mujeres de 15 a 49 años del respectivo año, todo lo anterior multiplicado por cinco (ya que la información se ordeno por edades quinquenales):
+
+    Para 2010:
+
+    $$
+    TGF = 5 \cdot \sum_{x=15}^{45} {}_5f_x
+    $$
+
+    $$
+    TGF = 5 \cdot ({}_5f_{15} + {}_5f_{20} + {}_5f_{25} + {}_5f_{30} + {}_5f_{35} + {}_5f_{40} + {}_5f_{45}) 
+    $$
+
+    $$
+      TGF = 5 \cdot (0.0548 + 0.1007 + 0.0910 + 0.0578 + 0.0266 + 0.0061 + 0.0005) 
+    $$
+
+    $$
+     TGF = 5 \cdot 0.3374 
+    $$
+
+    $$
+    TGF = 1.69
+    $$
+
+    Para el año 2010, el estado de Hidalgo tiene una TGF igual a 1.69, cifra que interpreta un promedio de 1.69 hijos por mujer.
+
+    Para 2019:
+
+    $$
+    TGF = 5 \cdot \sum_{x=15}^{45} {}_5f_x 
+    $$
+
+    $$
+     TGF = 5 \cdot ({}_5f_{15} + {}_5f_{20} + {}_5f_{25} + {}_5f_{30} + {}_5f_{35} + {}_5f_{40} + {}_5f_{45}) 
+    $$
+
+    $$
+      TGF = 5 \cdot (0.0401 + 0.0729 + 0.0725 + 0.0467 + 0.0226 + 0.0056 + 0.0004)
+    $$
+
+    $$
+      TGF = 5 \cdot 0.2609 
+    $$
+
+    $$
+    TGF = 1,30
+    $$
+
+    Para el año 2019, obtenemos una TGF igual a 1.30. Reflejando un promedio de 1.30 hijos por mujer.
+
+2.  **Tasas Brutas de Reproducción (TBR):** Es el simple cálculo
+
+    $$
+    TBR = TGF \cdot k
+    $$
+
+    Donde $k$ es una proporción teórica de nacimientos femeninos que se supone es la misma para los diferentes grupos de edad. Esta proporción está bajo el supuesto de, un promedio de 105 nacimientos masculinos por cada 100 femeninos calculada así:
+
+    $$
+    k = \frac{100}{205} = 0.4878
+    $$
+
+    Para 2010:
+
+    $$
+    TBR = (1.69)(0.4878)
+    $$
+
+    $$
+    TBR = 0.8230
+    $$
+
+    Para el año 2010, la TBR de Hidalgo fue de 0.8230. Al ser un valor menor a 1, se interpreta que, la población de madres (femenina en edad fértil) no está siendo reemplazada por el mismo número de hijas.
+
+    Para 2019:
+
+    $$
+    TBR = (1.30)(0.4878)
+    $$
+
+    $$
+    TBR = 0.6363
+    $$
+
+    Para 2019, la TBR en el estado disminuye más, con un valor de 0.6363. Siendo un número menor a 1, continuando con la tendencia de que las hijas no están sustituyendo a las madres.
+
+    Esto es muy interesante, ya que nos indica que las nuevas generaciones se estan adaptando a los cambios económicos y sociales del país; priorizando desarrollarse profesionalmente que formar una familia.
+
+```         
+```
+
+3.  **Tasas Netas de Reproducción (TNR):** Es el cálculo
+
+    $$
+    TNR = 5 \cdot \sum_{x=15}^{45}{}_ 5f_x(f) \cdot {}_ {x + 2.5}P_0 (f)  
+    $$
+
+    $$
+    TNR = 5 \cdot K \cdot \sum_{x=15}^{45}{}_ 5f_x \cdot {}_{x + 2.5}P_0 (f)
+    $$
+
+    Para obtener
+
+    $$
+    {}_{x + 2.5}P_0 (f)
+    $$
+
+    Sustituimos las L(x)fem en la tabla del año correspondiente, los cuales ya habíamos calculado en las tablas de mortalidad. Entonces:
+
+    Para 2010:
+
+    $$
+    TNR= 0.80
+    $$
+
+    Para el año 2010, tenemos una TNR de 0.80, significa que, en ese periodo, un grupo de 1,000 mujeres de Hidalgo en edad fértil, sería sustituido por 800 hijas, lo que representa una reducción del 20% respecto a la original.
+
+    Para 2019:
+
+    $$
+    TNR=0.62
+    $$
+
+    Para el año 2019, la TNR en Hidalgo descendió a 0.62. Esto lo podemos interpretar como por cada 1,000 mujeres en edad reproductiva, solo 620 hijas (28%) las van a reemplazar.
+
+## Tasas Específicas de Fecundidad: Hidalgo, México y Taiwan.
 
 ```{r}
 #| echo: false
 #| out.width: "50%"
 #| fig.align: "center"
 
-knitr::include_graphics("F2021.png")
+knitr::include_graphics("TEFE.png")
 ```
 
-## **Tabla de mortalidad masculina Hidalgo 2010**
+| Grupo de edad | Hidalgo 2019 | México 2019 | Taiwan 2019 |
+|---------------|--------------|-------------|-------------|
+| 15-19         | 4.011        | 63.359      | 4           |
+| 20-24         | 7.292        | 111.712     | 20          |
+| 25-29         | 7.252        | 104.11      | 53          |
+| 30-34         | 4.667        | 74.593      | 79          |
+| 35-39         | 2.259        | 38.694      | 44          |
+| 40-44         | 0.564        | 10.075      | 9           |
+| 45-49         | 0.040        | 0.808       | 0.5         |
 
-```{r}
-#| echo: false
-#| out.width: "50%"
-#| fig.align: "center"
+Esta gráfica muestra las tasas específicas de Fecundidad por grupos de edad quinquenales para el año 2019, y compara el estado de Hidalgo, México y Taiwán. 
 
-knitr::include_graphics("M2010.png")
-```
+Las tasas específicas de fecundidad miden el número de nacimientos que ocurren por cada 1,000 mujeres dentro de un rango de edad establecido, de 15 a 45 años. 
 
-## **Tabla de mortalidad masculina Hidalgo 2019**
+La línea roja, que representa México, describe una estructura de cúspide temprana. Comienza con un punto muy alto en el grupo de 15-19 años, reflejando un embarazo adolescente. 
 
-```{r}
-#| echo: false
-#| out.width: "50%"
-#| fig.align: "center"
+El pico máximo de la reproducción se alcanza a edades muy tempranas, en el grupo de 20-24 años. A partir de los 30 años la fecundidad nacional cae de manera pronunciada,, mostrando que la planificación familiar tiende a concentrar el nacimiento de los hijos en la juventud. 
 
-knitr::include_graphics("M2019.png")
-```
+Taiwán es representado con la línea verde, refleja un comportamiento muy diferente, ya que al ser un país asiatico, tiene otros hábitos y costumbres, caracterizados por tasas de natalidad bajas y postergación de la maternidad. 
 
-## **Tabla de mortalidad masculina Hidalgo 2021**
-
-```{r}
-#| echo: false
-#| out.width: "50%"
-#| fig.align: "center"
-
-knitr::include_graphics("M2021.png")
-```
+En los grupos de 15-19 años y 20-24 años, la fecundidad es sumamente baja. A diferencia de México, el pico de fecundidad ocurre hasta el grupo de 30-34 años. Demostrando que las mujeres taiwanesas deciden tener hijos a edades mucho más maduras. 
 
 ## **Resultados del analisis por indicadores y COVID**
 
-## I. Supervivencia masculina
+### Supervivencia Masculina
 
 La supervivencia masculina presenta niveles inferiores a los de las mujeres en todos los años analizados. Entre 2010 y 2019 existía una mejora gradual; sin embargo, en 2021 se observa una disminución importante.
 
@@ -376,7 +1182,7 @@ Este resultado coincide con estudios epidemiológicos internacionales que muestr
 
 -   Menor búsqueda oportuna de atención médica.
 
-## II. Esperanza de vida masculina
+### Esperanza de vida masculina
 
 La esperanza de vida masculina experimenta un deterioro notable en 2021.
 
@@ -384,7 +1190,7 @@ En comparación con 2019, la reducción es más marcada que en mujeres, lo que e
 
 La caída de la esperanza de vida refleja un exceso de mortalidad concentrado principalmente en adultos y adultos mayores. Además, pone de manifiesto el retroceso temporal de los avances sanitarios acumulados durante la década previa
 
-## III. Número de hombres sobrevivientes
+### Número de hombres sobrevivientes
 
 El número de sobrevivientes masculinos disminuye más rápidamente conforme avanza la edad.
 
@@ -411,3 +1217,13 @@ El análisis comparativo permite concluir que:
 Estas diferencias son coherentes con los patrones demográficos y epidemiológicos observados a nivel nacional e internacional durante la pandemia.
 
 Como conclusión, los resultados evidencian cómo una emergencia sanitaria puede alterar de manera rápida y profunda la dinámica demógrafica de una población.
+
+## Conclusiones
+
+Con base en los datos de Hidalgo, se observan dos fuerzas demográficas clave con impacto actuarial:
+
+1.  **Shock de Mortalidad (COVID-19):** La pandemia rompió la tendencia de mejora en la supervivencia. La esperanza de vida al nacer $e_0$ cayó drásticamente (hombres: de 74.33 a 69.44 años; mujeres: de 79.4 a 76.9 años). El aumento en las probabilidades de muerte $q_x​$ en edades adultas, especialmente en hombres, implica un retroceso en los supuestos de mejora continua de la mortalidad, afectando el cálculo de primas y reservas en seguros de vida y rentas vitalicias.
+
+2.  **Fecundidad por debajo del reemplazo:** La Tasa Global de Fecundidad (TGF) disminuyó de 1.69 hijos por mujer en 2010 a 1.30 en 2019, cifra muy inferior al nivel de reemplazo de 2.1. En consecuencia, la Tasa Neta de Reproducción (TNR) pasó de 0.80 a 0.62, indicando que cada cohorte de mujeres no está siendo reemplazada numéricamente.
+
+Hidalgo enfrenta un panorama de **envejecimiento poblacional acelerado**. La baja fecundidad reducirá la base de cotizantes jóvenes, mientras que el aumento temporal de la mortalidad por COVID-19 presiona los sistemas de salud. Para la actuaría, esto implica mayores costos por dependencia y un desafío en la sostenibilidad de los sistemas de pensiones, requiriendo ajustes en modelos de largo plazo que ya no pueden asumir mejoras lineales en la mortalidad ni estabilidad en el tamaño de la fuerza laboral joven.
