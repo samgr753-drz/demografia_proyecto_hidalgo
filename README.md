@@ -6,9 +6,9 @@
 ---
 
 ## Contenido 
-El informe contiene un breve contexto del estado de Hidalgo, fórmulas utilizadas, tablas con esperanzas de vida, mortalidad femenina y masculina de Hidalgo de los años 2010, 2019 y 2021. El cálculo de 
-tasas globales de fecundidad, tasas netas de reproducción, y tasas específicas de fecundidad del estado de Hidalgo, México y Taiwán. 
-Así como un analisis de cada una de las gráficas presentadas y su argumento tras la contingencia sanitaria vivida en 2021. 
+El informe contiene un breve contexto del estado de Hidalgo, fórmulas utilizadas, tablas de vida, mortalidad femenina y masculina de Hidalgo de los años 2010, 2019 y 2021. El cálculo de 
+tasas globales de fecundidad, tasas brutas de reproducción, y tasas netas de reproducción del estado de Hidalgo.  
+Así como un análisis de cada una de las gráficas presentadas y su argumento tras la contingencia sanitaria vivida en 2021. 
 ---
 
 ##  Estructura del Repositorio
